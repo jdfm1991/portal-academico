@@ -4,8 +4,75 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e40b0420f7d48ca8e2ff1eb1f68ea7cd",
+    "content-hash": "c8638d4fb797aac5259af8174d6d6502",
     "packages": [
+        {
+            "name": "amendozaaguiar/laravel-lat-es",
+            "version": "13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amendozaaguiar/laravel-lat-es.git",
+                "reference": "2e7fd1891dcf851d6227bc1ddcd352dd870b43a5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amendozaaguiar/laravel-lat-es/zipball/2e7fd1891dcf851d6227bc1ddcd352dd870b43a5",
+                "reference": "2e7fd1891dcf851d6227bc1ddcd352dd870b43a5",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0|^10.0|^11.0",
+                "pestphp/pest": "^2.0|^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^2.0|^3.0|^4.0",
+                "symfony/yaml": "^6.0|^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Amendozaaguiar\\LaravelLatEs\\LaravelLatEsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Amendozaaguiar\\LaravelLatEs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anderson Mendoza",
+                    "email": "amendozaaguiar@outlook.com",
+                    "homepage": "https://github.com/amendozaaguiar",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Archivos de traducción al español latinoamericano para Laravel (auth, pagination, passwords, validation).",
+            "homepage": "https://github.com/amendozaaguiar/laravel-lat-es",
+            "keywords": [
+                "Espanol",
+                "idioma",
+                "laravel",
+                "latin america",
+                "localización",
+                "traduccion"
+            ],
+            "support": {
+                "issues": "https://github.com/amendozaaguiar/laravel-lat-es/issues",
+                "source": "https://github.com/amendozaaguiar/laravel-lat-es/tree/13.0"
+            },
+            "time": "2026-10-10T12:57:22+00:00",
+            "published-time": "2026-10-10T13:01:49+00:00"
+        },
         {
             "name": "anourvalar/eloquent-serialize",
             "version": "1.3.12",

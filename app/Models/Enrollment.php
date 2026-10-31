@@ -42,4 +42,23 @@ class Enrollment extends Model
     {
         return $this->belongsTo(User::class, 'reviewed_by');
     }
+
+    public function receipts()
+    {
+        return $this->hasMany(PaymentReceipt::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function (Enrollment $enrollment) {
+            if (
+                $enrollment->payment_status === 'paid' &&
+                in_array($enrollment->enrollment_status, ['rejected', 'cancelled'])
+            ) {
+                throw new \InvalidArgumentException(
+                    'No se puede marcar un pago como pagado en una inscripción rechazada o cancelada.'
+                );
+            }
+        });
+    }
 }
