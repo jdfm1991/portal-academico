@@ -7,14 +7,16 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Public\CourseCatalogController;
+use App\Http\Controllers\Public\CourseDetailController;
+use App\Http\Controllers\Public\EnrollmentController;
+use App\Http\Controllers\Public\HomeController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'message' => 'El portal digital está en construcción.',
-    ]);
-});
+Route::get('/', HomeController::class)->name('home');
 
+Route::get('/cursos', [CourseCatalogController::class, 'index'])->name('courses.index');
 
+Route::get('/cursos/{slug}', CourseDetailController::class)->name('courses.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
@@ -43,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/email/verification-notification', [EmailVerificationController::class, 'send'])
         ->middleware('throttle:6,1')
         ->name('verification.send');
+
+    Route::post('/cursos/{slug}/inscribirse', [EnrollmentController::class, 'store'])
+        ->name('enrollments.store');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
