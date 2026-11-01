@@ -11,6 +11,8 @@ use App\Http\Controllers\Public\CourseCatalogController;
 use App\Http\Controllers\Public\CourseDetailController;
 use App\Http\Controllers\Public\EnrollmentController;
 use App\Http\Controllers\Public\HomeController;
+use App\Http\Controllers\Student\DashboardController;
+use App\Http\Controllers\Student\PaymentReceiptController;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -51,7 +53,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/mi-cuenta/cursos', function () {
-        return Inertia::render('Student/Courses'); // esta página la crearás en Fase 6
-    })->name('student.courses');
+    Route::get('/mi-cuenta/cursos', [DashboardController::class, 'index'])
+        ->name('student.courses');
+
+    Route::get('/mi-cuenta/inscripciones/{enrollment}/comprobante', [PaymentReceiptController::class, 'create'])
+        ->name('student.receipts.create');
+
+    Route::post('/mi-cuenta/inscripciones/{enrollment}/comprobante', [PaymentReceiptController::class, 'store'])
+        ->name('student.receipts.store');
 });
