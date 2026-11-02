@@ -13,6 +13,7 @@ use App\Http\Controllers\Public\EnrollmentController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Student\DashboardController;
 use App\Http\Controllers\Student\PaymentReceiptController;
+use App\Http\Controllers\Student\CourseMaterialController;
 
 Route::get('/', HomeController::class)->name('home');
 
@@ -61,4 +62,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/mi-cuenta/inscripciones/{enrollment}/comprobante', [PaymentReceiptController::class, 'store'])
         ->name('student.receipts.store');
+
+    Route::get('/mi-cuenta/cursos/{slug}/materiales', [CourseMaterialController::class, 'index'])
+        ->name('student.materials.index');
 });

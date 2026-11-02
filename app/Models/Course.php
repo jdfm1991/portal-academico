@@ -20,6 +20,7 @@ class Course extends Model
         'syllabus',
         'price',
         'modality',
+        'level',
         'start_date',
         'end_date',
         'image_path',
@@ -63,4 +64,5 @@ class Course extends Model
         return $query->where('status', 'published')
                      ->whereNotNull('published_at');
     }
+    
 }
