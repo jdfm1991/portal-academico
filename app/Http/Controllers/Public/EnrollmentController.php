@@ -39,8 +39,7 @@ class EnrollmentController extends Controller
             'requested_at' => now(),
         ]);
 
-        return redirect()
-            ->route('courses.show', $course->slug)
-            ->with('status', 'Solicitud de inscripción enviada. Revisa tu correo o tu cuenta para más detalles.');
+        return redirect()->route('courses.show', $course->slug)
+            ->with('status', 'Solicitud de inscripción enviada correctamente.');
     }
 }

@@ -52,8 +52,8 @@ export default function Home({ featuredCourses, categories }) {
                                 className="bg-white rounded-lg shadow hover:shadow-md overflow-hidden"
                             >
                                 <div className="h-40 bg-gray-200 flex items-center justify-center text-gray-400">
-                                    {course.image_path ? (
-                                        <img src={course.image_path} alt={course.title} className="w-full h-full object-cover" />
+                                    {course.image_url ? (
+                                        <img src={course.image_url} alt={course.title} className="w-full h-full object-cover" />
                                     ) : (
                                         'Sin imagen'
                                     )}

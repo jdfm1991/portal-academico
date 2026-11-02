@@ -7,12 +7,6 @@ export default function Show({ course, hasEnrollment }) {
     return (
         <PublicLayout>
             <div className="max-w-4xl mx-auto px-4 py-8">
-                {flash.status && (
-                    <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
-                        {flash.status}
-                    </div>
-                )}
-
                 {errors.enrollment && (
                     <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">
                         {errors.enrollment}

@@ -35,13 +35,6 @@ export default function Index({ enrollments }) {
                         Explorar más cursos
                     </Link>
                 </div>
-
-                {flash.status && (
-                    <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">
-                        {flash.status}
-                    </div>
-                )}
-
                 {enrollments.length === 0 ? (
                     <div className="bg-white p-12 rounded-lg shadow text-center">
                         <p className="text-gray-500 mb-4">Aún no tienes inscripciones.</p>

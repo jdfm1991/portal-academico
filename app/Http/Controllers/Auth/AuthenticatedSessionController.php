@@ -24,10 +24,10 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         if (in_array($user->role, ['admin', 'teacher'])) {
-            return redirect()->intended('/admin');
+            return Inertia::location('/admin');
         }
 
-        return redirect()->intended('/mi-cuenta/cursos');
+        return Inertia::location('/mi-cuenta/cursos');
     }
 
     public function destroy(Request $request)

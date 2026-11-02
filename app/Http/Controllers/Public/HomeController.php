@@ -18,7 +18,8 @@ class HomeController extends Controller
                 ->with('category', 'teacher.user')
                 ->latest('published_at')
                 ->take(3)
-                ->get(),
+                ->get()
+                ->append('image_url'),
             'categories' => Category::where('is_active', true)->get(['id', 'name', 'slug']),
         ]);
     }

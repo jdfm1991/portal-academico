@@ -47,15 +47,20 @@ class CourseCatalogController extends Controller
             $query->where('title', 'like', '%' . $request->search . '%');
         }
 
+        if ($request->boolean('free')) {
+            $query->where('price', 0);
+        }
+
         $courses = $query
             ->latest('published_at')
             ->paginate(12)
-            ->withQueryString(); // mantiene los filtros en los enlaces de paginación
+            ->withQueryString()
+            ->through(fn($course) => $course->append('image_url'));
 
         return Inertia::render('Public/Courses/Index', [
             'courses' => $courses,
             'categories' => Category::where('is_active', true)->get(['id', 'name', 'slug']),
-            'filters' => $request->only(['category', 'modality', 'level', 'min_price', 'max_price', 'search']),
+            'filters' => $request->only(['category', 'modality', 'level', 'min_price', 'max_price', 'search', 'free']),
         ]);
     }
 }

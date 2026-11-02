@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Courses\Schemas;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
@@ -20,7 +21,7 @@ class CourseForm
                     ->required()
                     ->maxLength(255)
                     ->live(onBlur: true)
-                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', \Str::slug($state))),
+                    ->afterStateUpdated(fn($state, callable $set) => $set('slug', \Str::slug($state))),
                 TextInput::make('slug')
                     ->label('Slug')
                     ->required()
@@ -28,13 +29,13 @@ class CourseForm
                     ->unique(ignoreRecord: true),
                 Select::make('category_id')
                     ->label('Categoría')
-                    ->relationship('category', 'name', fn ($query) => $query->where('is_active', true))
+                    ->relationship('category', 'name', fn($query) => $query->where('is_active', true))
                     ->searchable()
                     ->required(),
                 Select::make('teacher_id')
                     ->label('Profesor')
                     ->relationship('teacher', 'id')
-                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->user->name)
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->user->name)
                     ->searchable()
                     ->nullable(),
                 Textarea::make('description')
@@ -74,9 +75,14 @@ class CourseForm
                 DatePicker::make('end_date')
                     ->label('Fecha de fin')
                     ->after('start_date'),
-                TextInput::make('image_path')
-                    ->label('Ruta de imagen')
-                    ->maxLength(255),
+                FileUpload::make('image_path')
+                    ->label('Imagen de portada')
+                    ->image()
+                    ->disk('public')
+                    ->directory('courses')
+                    ->imageEditor()
+                    ->maxSize(2048)
+                    ->helperText('Se recomienda una imagen horizontal de al menos 800x400 px. Máximo 2 MB.'),
                 Select::make('status')
                     ->label('Estado')
                     ->options([
@@ -89,7 +95,7 @@ class CourseForm
                     ->live(),
                 DateTimePicker::make('published_at')
                     ->label('Fecha de publicación')
-                    ->visible(fn (callable $get) => $get('status') === 'published'),
+                    ->visible(fn(callable $get) => $get('status') === 'published'),
             ]);
     }
 }

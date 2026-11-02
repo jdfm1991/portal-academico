@@ -27,8 +27,9 @@ class HandleInertiaRequests extends Middleware
                 ] : null,
             ],
             'flash' => [
-                'status' => fn () => $request->session()->get('status'),
+                'status' => fn() => $request->session()->get('status'),
             ],
+            'academy' => \App\Models\AcademyInfo::allAsArray(),
         ]);
     }
 }

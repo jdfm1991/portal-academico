@@ -49,8 +49,7 @@ class PaymentReceiptController extends Controller
             'uploaded_at' => now(),
         ]);
 
-        return redirect()
-            ->route('student.courses')
+        return redirect()->route('student.courses')
             ->with('status', 'Comprobante subido correctamente. El administrador lo revisará pronto.');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -62,7 +63,14 @@ class Course extends Model
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
-                     ->whereNotNull('published_at');
+            ->whereNotNull('published_at');
     }
-    
+
+    /**
+     * Obtiene la URL pública completa de la imagen de portada.
+     */
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image_path ? Storage::disk('public')->url($this->image_path) : null;
+    }
 }

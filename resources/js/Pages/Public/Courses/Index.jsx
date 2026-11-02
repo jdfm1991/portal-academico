@@ -99,6 +99,17 @@ export default function Index({ courses, categories, filters }) {
                                 />
                             </div>
 
+                            <div className="flex items-center">
+                                <input
+                                    type="checkbox"
+                                    id="free"
+                                    checked={filters.free === '1' || filters.free === true}
+                                    onChange={(e) => updateFilters('free', e.target.checked ? '1' : '')}
+                                    className="mr-2"
+                                />
+                                <label htmlFor="free" className="text-sm font-medium">Solo cursos gratuitos</label>
+                            </div>
+
                             {hasFilters && (
                                 <button
                                     onClick={clearFilters}
@@ -129,8 +140,8 @@ export default function Index({ courses, categories, filters }) {
                                             className="bg-white rounded-lg shadow hover:shadow-md overflow-hidden"
                                         >
                                             <div className="h-40 bg-gray-200 flex items-center justify-center text-gray-400">
-                                                {course.image_path ? (
-                                                    <img src={course.image_path} alt={course.title} className="w-full h-full object-cover" />
+                                                {course.image_url ? (
+                                                    <img src={course.image_url} alt={course.title} className="w-full h-full object-cover" />
                                                 ) : (
                                                     'Sin imagen'
                                                 )}
@@ -159,13 +170,12 @@ export default function Index({ courses, categories, filters }) {
                                             <Link
                                                 key={i}
                                                 href={link.url || '#'}
-                                                className={`px-3 py-1 rounded border text-sm ${
-                                                    link.active
-                                                        ? 'bg-blue-600 text-white border-blue-600'
-                                                        : link.url
+                                                className={`px-3 py-1 rounded border text-sm ${link.active
+                                                    ? 'bg-blue-600 text-white border-blue-600'
+                                                    : link.url
                                                         ? 'bg-white text-gray-700 hover:bg-gray-50'
                                                         : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                                }`}
+                                                    }`}
                                                 dangerouslySetInnerHTML={{ __html: link.label }}
                                                 preserveScroll
                                             />
